@@ -1,54 +1,29 @@
-using Hahn.Application.Services;
-using Hahn.Domain.Repositories;
-using Hahn.Infrastructure.Persistence;
-using Hahn.Infrastructure.Repositories;
-using Hahn.Jobs.Services;
-using Hangfire;
-using Microsoft.EntityFrameworkCore;
+using Hahn.WorkerService.Extensions;
 
 var builder = Host.CreateApplicationBuilder(args);
-// builder.Services.AddHostedService<Worker>();
 
 // Add EF Core
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext(builder.Configuration);
 
-// Add DI
-builder.Services.AddScoped<ICryptoCurrencyRepository, CryptoCurrencyRepository>();
-builder.Services.AddHttpClient<IUpsertCryptoService, UpsertCryptoService>();
-builder.Services.AddScoped<CryptoUpsertJob>();
+// DI
+builder.Services.AddWorkerServices();
 
 // Add Hangfire
-builder.Services.AddHangfire(config =>
-    config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddHangfireServer();
-
+builder.Services.AddHangfireServices(builder.Configuration);
 
 var host = builder.Build();
 
 // Schedule job
-using (var scope = host.Services.CreateScope())
+using (var scope = builder.Services.BuildServiceProvider().CreateScope())
 {
-    var recurringJobManager = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
-    recurringJobManager.AddOrUpdate<CryptoUpsertJob>(
-        "crypto-upsert-job",
-        job => job.RunAsync(),
-        Cron.Hourly); // ou "0 * * * *"
+    scope.ServiceProvider.ScheduleHangfireJob();
 }
 
-
-// ✅ Run job manually at startup for debugging
-// using (var scope = host.Services.CreateScope())
+// For debug
+// using (var scope = builder.Services.BuildServiceProvider().CreateScope())
 // {
-//     var job = scope.ServiceProvider.GetRequiredService<CryptoUpsertJob>();
-//     await job.RunAsync(); // 🔍 Roda aqui pra debugar
-//
-//     var recurringJobManager = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
-//     recurringJobManager.AddOrUpdate<CryptoUpsertJob>(
-//         "crypto-upsert-job",
-//         j => j.RunAsync(),
-//         Cron.Hourly);
+//     scope.ServiceProvider.ScheduleHangfireJob();
+//     await scope.ServiceProvider.RunHangfireJobNowAsync(); // 👈 debug imediato
 // }
-
 
 host.Run();
