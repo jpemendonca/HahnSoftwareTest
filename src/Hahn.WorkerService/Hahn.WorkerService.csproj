@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-Hahn.WorkerService-a2327b93-0213-4856-a2a5-571b63f3a781</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire" Version="1.8.18" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.8.18" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hahn.Application\Hahn.Application.csproj" />
+    <ProjectReference Include="..\Hahn.Domain\Hahn.Domain.csproj" />
+    <ProjectReference Include="..\Hahn.Infrastructure\Hahn.Infrastructure.csproj" />
+    <ProjectReference Include="..\Hahn.Jobs\Hahn.Jobs.csproj" />
+  </ItemGroup>
+</Project>
