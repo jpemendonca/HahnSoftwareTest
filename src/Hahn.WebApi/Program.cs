@@ -8,17 +8,7 @@ builder.MapDbContext();
 
 builder.AddCryptoServices();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy =>
-    {
-        policy
-            .AllowAnyOrigin()
-            .AllowAnyHeader()
-            .AllowAnyMethod();
-    });
-});
-
+builder.AddCorsConfiguration();
 
 var app = builder.Build();
 

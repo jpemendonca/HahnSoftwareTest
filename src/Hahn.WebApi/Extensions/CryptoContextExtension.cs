@@ -29,8 +29,16 @@ public static class CryptoContextExtension
             [AsParameters] CryptoQueryParams query,
             IUpsertCryptoService service, CancellationToken ct) =>
         {
-            var result = await service.GetAllAsync(query, ct);
-            return Results.Ok(result);
+            try
+            {
+                var result = await service.GetAllAsync(query, ct);
+                return Results.Ok(result);
+            }
+            catch (Exception ex)
+            {
+                // logger.LogError(ex, "Error occurred during crypto upsert job");
+                return Results.InternalServerError("An error occured");
+            }
         });
     }
 }
