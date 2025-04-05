@@ -17,8 +17,8 @@ public class CryptoCurrencyRepository : ICryptoCurrencyRepository
     public async Task<List<CryptoCurrency>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await _context.Cryptos
-            .OrderBy(c => c.Name)
             .AsNoTracking()
+            .Take(90)
             .ToListAsync(cancellationToken);
     }
 

@@ -2,7 +2,6 @@ using Hahn.WorkerService.Extensions;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-// Add EF Core
 builder.Services.AddDbContext(builder.Configuration);
 
 // DI

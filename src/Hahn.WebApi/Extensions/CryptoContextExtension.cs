@@ -1,7 +1,9 @@
 ﻿using Hahn.Application.Services;
+using Hahn.Domain.Dtos;
 using Hahn.Domain.Repositories;
 using Hahn.Infrastructure.Persistence;
 using Hahn.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hahn.WebApi.Extensions;
@@ -23,9 +25,11 @@ public static class CryptoContextExtension
     
     public static void MapCryptoEndpoints(this WebApplication app)
     {
-        app.MapGet("/cryptos", async (IUpsertCryptoService service, CancellationToken ct) =>
+        app.MapGet("/cryptos", async (
+            [AsParameters] CryptoQueryParams query,
+            IUpsertCryptoService service, CancellationToken ct) =>
         {
-            var result = await service.GetAllAsync(ct);
+            var result = await service.GetAllAsync(query, ct);
             return Results.Ok(result);
         });
     }

@@ -1,6 +1,8 @@
 ﻿using System.Globalization;
 using System.Text.Json;
 using Hahn.Application.External;
+using Hahn.Domain.Dtos;
+using Hahn.Domain.Enums;
 using Hahn.Domain.Models;
 using Hahn.Domain.Repositories;
 
@@ -46,8 +48,28 @@ public class UpsertCryptoService : IUpsertCryptoService
         await _repository.UpsertAsync(cryptos, cancellationToken);
     }
 
-    public async Task<List<CryptoCurrency>> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<List<CryptoCurrency>> GetAllAsync(CryptoQueryParams queryParams, CancellationToken cancellationToken = default)
     {
-        return await _repository.GetAllAsync(cancellationToken);
+        var items = await _repository.GetAllAsync(cancellationToken);
+
+        items = queryParams.Direction == EnumSortDirection.Desc
+            ? items.OrderByDescending(c => GetSortKey(c, queryParams.SortBy)).ToList()
+            : items.OrderBy(c => GetSortKey(c, queryParams.SortBy)).ToList();
+
+        return items;
+        
+    }
+    
+    private object GetSortKey(CryptoCurrency crypto, EnumSortBy sortBy)
+    {
+        return sortBy switch
+        {
+            EnumSortBy.Name => crypto.Name,
+            EnumSortBy.Symbol => crypto.Symbol,
+            EnumSortBy.PriceUsd => crypto.PriceUsd,
+            EnumSortBy.PercentChange24h => crypto.PercentChange24h,
+            EnumSortBy.MarketCapUsd => crypto.MarketCapUsd,
+            _ => crypto.Name
+        };
     }
 }
