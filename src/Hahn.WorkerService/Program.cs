@@ -18,11 +18,4 @@ using (var scope = builder.Services.BuildServiceProvider().CreateScope())
     scope.ServiceProvider.ScheduleHangfireJob();
 }
 
-// For debug
-// using (var scope = builder.Services.BuildServiceProvider().CreateScope())
-// {
-//     scope.ServiceProvider.ScheduleHangfireJob();
-//     await scope.ServiceProvider.RunHangfireJobNowAsync(); // 👈 debug imediato
-// }
-
 host.Run();

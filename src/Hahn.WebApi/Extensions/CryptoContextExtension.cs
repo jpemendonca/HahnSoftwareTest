@@ -27,7 +27,9 @@ public static class CryptoContextExtension
     {
         app.MapGet("/cryptos", async (
             [AsParameters] CryptoQueryParams query,
-            IUpsertCryptoService service, CancellationToken ct) =>
+            IUpsertCryptoService service,
+            ILogger<Program> logger,
+            CancellationToken ct) =>
         {
             try
             {
@@ -36,9 +38,10 @@ public static class CryptoContextExtension
             }
             catch (Exception ex)
             {
-                // logger.LogError(ex, "Error occurred during crypto upsert job");
-                return Results.InternalServerError("An error occured");
+                logger.LogError(ex, "Error occurred during crypto get endpoint");
+                return Results.Problem("An error occurred while fetching the data.");
             }
         });
+
     }
 }

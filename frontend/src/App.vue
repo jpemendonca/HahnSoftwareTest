@@ -36,65 +36,7 @@ onMounted(() => {
         <h1 class="text-2xl font-bold mb-4">Cryptocurrency</h1>
 
         <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
-          <!--          <div>-->
-          <!--            <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="dropdown-toggle" type="button">-->
-          <!--              <svg class="w-3 h-3 text-gray-500 dark:text-gray-400 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">-->
-          <!--                <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/>-->
-          <!--              </svg>-->
-          <!--              Order by-->
-          <!--              <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">-->
-          <!--                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>-->
-          <!--              </svg>-->
-          <!--            </button>-->
-          <!--            &lt;!&ndash; Dropdown menu &ndash;&gt;-->
-          <!--            <div id="dropdownRadio" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600"-->
-          <!--                 data-popper-reference-hidden=""-->
-          <!--                 data-popper-escaped=""-->
-          <!--                 data-popper-placement="top"-->
-          <!--                 style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);">-->
-          <!--              <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioButton">-->
-          <!--                <li>-->
-          <!--                  <div class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">-->
-          <!--                    <input -->
-          <!--                        id="filter-radio-example-1"-->
-          <!--                        type="radio" value=""-->
-          <!--                        name="filter-radio"-->
-          <!--                        class="input-dropdown-item"-->
-          <!--                        @change="() => { sortBy = 'PercentChange24h'; sortDirection = 'Desc'; fetchCryptos() }"-->
-          <!--                    >-->
-          <!--                    <label for="filter-radio-example-1" class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Top gainers (24h)</label>-->
-          <!--                  </div>-->
-          <!--                </li>-->
-          <!--                <li>-->
-          <!--                  <div class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">-->
-          <!--                    <input -->
-          <!--                        id="filter-radio-example-2"-->
-          <!--                        type="radio"-->
-          <!--                        value=""-->
-          <!--                        name="filter-radio" -->
-          <!--                        class="input-dropdown-item"-->
-          <!--                        @change="() => { sortBy = 'PercentChange24h'; sortDirection = 'Asc'; fetchCryptos() }"-->
-          <!--                    >-->
-          <!--                    <label for="filter-radio-example-2" class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Top losers (24h)</label>-->
-          <!--                  </div>-->
-          <!--                </li>-->
-          <!--                <li>-->
-          <!--                  <div class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">-->
-          <!--                    <input -->
-          <!--                        id="filter-radio-example-2"-->
-          <!--                        type="radio"-->
-          <!--                        value=""-->
-          <!--                        name="filter-radio"-->
-          <!--                        class="input-dropdown-item"-->
-          <!--                        @change="() => { sortBy = 'MarketCapUsd'; sortDirection = 'Desc'; fetchCryptos() }"-->
-          <!--                    >-->
-          <!--                    <label for="filter-radio-example-2" class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Market cap</label>-->
-          <!--                  </div>-->
-          <!--                </li>-->
-          <!--              </ul>-->
-          <!--            </div>-->
-          <!--          </div>-->
-
+          
           <select
               v-model="selectedSort"
               @change="handleSortChange"
@@ -183,7 +125,6 @@ onMounted(() => {
 
 
       </div>
-
 
     </div>
   </div>
