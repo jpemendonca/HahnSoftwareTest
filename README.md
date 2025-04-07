@@ -54,7 +54,7 @@ cd HahnSoftwareTest\src\Hahn.WorkerService
 dotnet run
 ```
 
-### ✅ 2. Frontend
+### ✅ 3. Frontend
 ```bash
 cd HahnSoftwareTest\frontend
 npm install
