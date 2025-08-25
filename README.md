@@ -1,7 +1,7 @@
 # CryptoInfoTracker
 
 CryptoInfoTracker is a fullstack software solution developed as part of a technical assessment for **Hahn Software**. 
-The project integrates a well-structured backend built in **.NET 9** using **Minimal APIs** with a modern **Vue.js + TypeScript** frontend. It leverages **Clean Architecture**, **Domain-Driven Design (DDD)**, and **SOLID** principles.
+The project integrates a well-structured backend built in **.NET 9** using **Minimal APIs** with a modern **Vue.js + TypeScript** frontend, incorporating **Hangfire** for background job processing. It leverages **Clean Architecture**, **Domain-Driven Design (DDD)**, and **SOLID** principles.
 
 ---
 
